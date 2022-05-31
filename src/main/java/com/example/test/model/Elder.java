@@ -9,7 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @ToString
@@ -49,11 +51,8 @@ public class Elder {
     private LocalDateTime updatedAt;
 
 //    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_elder",
-            joinColumns = { @JoinColumn(name = "elder_num")},
-            inverseJoinColumns = {@JoinColumn(name = "user_num")})
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "elder",fetch = FetchType.LAZY)
+    private List<UserElder> users = new ArrayList<>();
 
 
     public Elder() {

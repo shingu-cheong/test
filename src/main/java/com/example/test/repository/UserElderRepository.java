@@ -1,4 +1,7 @@
 package com.example.test.repository;
 
-public interface UserElderRepository {
+import com.example.test.model.UserElder;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserElderRepository extends JpaRepository<UserElder, Integer> {
 }

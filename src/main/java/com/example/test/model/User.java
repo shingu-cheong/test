@@ -12,9 +12,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @ToString
 @Setter
@@ -51,11 +49,13 @@ public class User {
     private LocalDateTime updatedAt;
 
 //    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
-//    @JoinTable(name = "user_elder",
-//            joinColumns = { @JoinColumn(name = "user_num")},
-//            inverseJoinColumns = {@JoinColumn(name = "elder_num")})
-    private Set<Elder> elders = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
+////    @JoinTable(name = "user_elder",
+////            joinColumns = { @JoinColumn(name = "user_num")},
+////            inverseJoinColumns = {@JoinColumn(name = "elder_num")})
+//    private Set<Elder> elders = new HashSet<>();
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<UserElder> userElders = new ArrayList<>();
 
     public User() {
         super();
