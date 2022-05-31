@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,9 +24,12 @@ public class LoginController {
 
         Optional<User> user = userService.checkUser(login.getUserEmail(), login.getUserPassword());
         if(user.isPresent()){
-            return new ResponseEntity("로그인 성공", HttpStatus.OK);
+//            Map<String, String> response = new HashMap<>();
+//            response.put("message", "Deleted Successfully")
+            return new ResponseEntity(user.get(), HttpStatus.OK);
         }else{
-            return new ResponseEntity("존재하지 않는 아이디 또는 비번", HttpStatus.NOT_FOUND);
+//            Map<String, String> response = new HashMap<>();
+            return new ResponseEntity(user.get(), HttpStatus.NOT_FOUND);
         }
     }
 }

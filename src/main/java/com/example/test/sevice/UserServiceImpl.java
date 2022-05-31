@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService{
 
     }
 
+//    @Override
+//    public User getUserIdByEmail(String email, String userPassword){
+//        return userRepository.findByUserEmailAndUserPassword(email,userPassword);
+//    }
+
 }

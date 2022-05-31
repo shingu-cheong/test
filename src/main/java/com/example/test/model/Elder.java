@@ -1,5 +1,6 @@
 package com.example.test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @ToString
 @Setter
@@ -35,6 +38,8 @@ public class Elder {
     @Column(name = "mng_ph", length = 11)
     private String mngPh;
 
+
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -42,6 +47,14 @@ public class Elder {
     @UpdateTimestamp
     @Column(name = "updated_at", updatable = true)
     private LocalDateTime updatedAt;
+
+//    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_elder",
+            joinColumns = { @JoinColumn(name = "elder_num")},
+            inverseJoinColumns = {@JoinColumn(name = "user_num")})
+    private Set<User> users = new HashSet<>();
+
 
     public Elder() {
         super();
