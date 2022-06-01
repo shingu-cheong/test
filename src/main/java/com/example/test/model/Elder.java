@@ -51,6 +51,7 @@ public class Elder {
     private LocalDateTime updatedAt;
 
 //    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "elder",fetch = FetchType.LAZY)
     private List<UserElder> users = new ArrayList<>();
 
@@ -58,4 +59,12 @@ public class Elder {
     public Elder() {
         super();
     }
+
+    public void add(UserElder userElder){
+        userElder.setElder(this);
+        getUsers().add(userElder);
+
+    }
+
+
 }

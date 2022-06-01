@@ -10,6 +10,8 @@ import javax.persistence.*;
 //@Getter
 //@Setter
 @ToString
+@Getter
+@Setter
 @Entity
 @Table(name = "user_elder")
 public class UserElder {

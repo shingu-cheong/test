@@ -1,7 +1,9 @@
 package com.example.test.sevice;
 
 import com.example.test.model.Elder;
+import com.example.test.model.UserElder;
 import com.example.test.repository.ElderRepository;
+import com.example.test.repository.UserElderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class ElderServiceImpl implements ElderService{
 
     @Autowired
     ElderRepository elderRepository;
+    @Autowired
+    UserElderRepository userElderRepository;
 
     @Override
     public List<Elder> getElders(){
@@ -25,7 +29,7 @@ public class ElderServiceImpl implements ElderService{
     }
 
     @Override
-    public  Elder getSingleUser(int id){
+    public  Elder getSingleElder(int id){
         Optional<Elder> elder = elderRepository.findById(id);
         if(elder.isPresent()){
             return elder.get();
@@ -47,6 +51,11 @@ public class ElderServiceImpl implements ElderService{
     public  List<Elder> getUserElders(int userid){
 
         return elderRepository.findByUserId(userid);
+    }
+
+    @Override
+    public UserElder addUserElder(UserElder userElder){
+        return userElderRepository.save(userElder);
     }
 
 

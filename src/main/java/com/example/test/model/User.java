@@ -54,10 +54,19 @@ public class User {
 ////            joinColumns = { @JoinColumn(name = "user_num")},
 ////            inverseJoinColumns = {@JoinColumn(name = "elder_num")})
 //    private Set<Elder> elders = new HashSet<>();
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<UserElder> userElders = new ArrayList<>();
 
     public User() {
         super();
     }
+
+    public void add(UserElder userElder){
+        userElder.setUser(this);
+        getUserElders().add(userElder);
+
+    }
+
 }
