@@ -46,22 +46,17 @@ public class ElderController {
 
     @PostMapping("/{userid}/elders")
     public ResponseEntity<Elder> saveElder(@PathVariable int userid, @RequestBody Elder elder){
+
         User user = userService.getSingleUser(userid);
         UserElder userElder = new UserElder();
-//        Integer elderid = elder.getId();
-        Elder elder1 = elderService.saveElder(elder);
-        userElder.setElder(elder1);
+
+        elderService.saveElder(elder);
+        userElder.setElder(elder);
         userElder.setUser(user);
 
         userElderController.addUserElder(userElder);
-//
-//        userElderRepository.save(userElder);
-//        user.setUserElders((List<UserElder>) userElder);
-//        userService.updateUser(user);
-//        elder.setUsers((List<UserElder>) userElder);
-//
 
-        return new ResponseEntity("fsdfa", HttpStatus.OK);
+        return new ResponseEntity("등록성공", HttpStatus.OK);
     }
 
 }
